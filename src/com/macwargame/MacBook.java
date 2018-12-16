@@ -39,7 +39,7 @@ public class MacBook extends GameObject implements EntityB{
 
     @Override
     public void tick() {
-        mili+=0.01666667;
+        mili+=0.01666667; //per milisec
 
         if (Game.player1_turn) {
 
@@ -54,8 +54,19 @@ public class MacBook extends GameObject implements EntityB{
         
         y -= (force*Math.sin(Math.toRadians(angle))-(9.8*mili));
 
-        
-        
+        //players rectangle
+        if (x >= 62 && x <= 115 && y >= 604 && y <= 697) { // player 1 bound
+            
+        }
+        if (x >= 1158 && x <= 1211 && y >= 604 && y <= 697) { // player 2 bound
+            
+        }
+        // obtacle
+        if (x >= 600 && x <= 696 && y >= 498 && y <=697) {
+            c.removeEntity(this);
+            mili = 0;
+            System.out.println("HIT A WALL!!!");
+        }
         //bounds
         if (x > 1286 || x < 0) {
             c.removeEntity(this);
