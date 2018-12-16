@@ -36,15 +36,15 @@ public class MacBook extends GameObject implements EntityB{
     public void tick() {
         //projectile's move //TODO need collision check 
         if (Game.player1_turn && !Game.player2_turn) {
-            System.out.println("p1's turn");
+//            System.out.println("p1's turn");
             x--;
         }
         if (!Game.player1_turn && Game.player2_turn) {
-            System.out.println("p2's turn");
+//            System.out.println("p2's turn");
             x++;
         }
-        y += (int)(x*Math.tan(Math.toRadians(angle))-(-9.8*x/2 * Math.pow(force, 2)* Math.pow(Math.cos(Math.toRadians(angle)), 2)));
-//        Clock.ckindex = 30;
+//        y += (int)(x*Math.tan(Math.toRadians(angle))-(-9.8*x/2 * Math.pow(force, 2)* Math.pow(Math.cos(Math.toRadians(angle)), 2)));
+        y-=2;
         
     }
     
@@ -54,7 +54,7 @@ public class MacBook extends GameObject implements EntityB{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Macbook, (int)x, (int)y, null);
+        g.drawImage(Macbook, (int)x, (int)y, 70, 70, null);
     }
 
     @Override

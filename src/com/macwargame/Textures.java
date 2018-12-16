@@ -91,7 +91,7 @@ public class Textures {
         player2[3] = ssp2.grabPlayerImage(900,0,300,300); //throw 1
         player2[4] = ssp2.grabPlayerImage(1200,0,300,300); //stand still
 
-        macbook[0] = ssobj.grabImage(1,1,32,32);
+        macbook[0] = ssobj.grabImage(0,0,200,200);
 
 
         

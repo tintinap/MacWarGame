@@ -57,7 +57,7 @@ public class Bullet extends GameObject implements EntityB {
     }
 
     public void render(Graphics g) {
-        g.drawImage(tex.macbook[0], (int)x, (int)y, null);
+        g.drawImage(tex.macbook[0], (int)x, (int)y, 70, 70, null);
 //        anim.drawAnimation(g, x, y, 0);
     }
 

@@ -104,7 +104,7 @@ public class Game extends Canvas implements Runnable {
             ss_lp  = loader.loadImage("img/LP.png");
             
             bg_game = loader.loadImage("img/game_bg.png");
-            ss_object = loader.loadImage("img/ArcadeSprite.png");
+            ss_object = loader.loadImage("img/mac.png");
             
             ss_clock = loader.loadImage("img/timer.png");
         } catch(IOException e) {
@@ -113,8 +113,7 @@ public class Game extends Canvas implements Runnable {
         
         tex = new Textures(this);
         
-        leftPointer = new TurnPointer(85, 570, tex, 25, 25);
-        rightPointer = new TurnPointer(WIDTH-100, 570, tex, 25, 25);
+
         leftSelectFrame = new SelectFrame(420, 222,tex, 205,205);
         rightSelectFrame = new SelectFrame(666, 222,tex, 205,205);
         rightSelectFrame.setState(0);
@@ -223,6 +222,13 @@ public class Game extends Canvas implements Runnable {
             lp2.tick();
             ck.tick();
             c.tick();
+            if (player1_turn) {
+                leftPointer.setState(1);
+                rightPointer.setState(0);
+            } else if (player2_turn) {
+                leftPointer.setState(0);
+                rightPointer.setState(1);
+            }
         }
 
     }
@@ -338,10 +344,21 @@ public class Game extends Canvas implements Runnable {
                 } catch(IOException er) {
                     er.printStackTrace();
                 }
+                //////////////////////////////////////////////////////////////////////
                 p1 = new Player1(50,610, tex);
                 throwAnimation = new Timer(50, new ThrowingAnim(tex));
 
                 p2 = new Player2(WIDTH-140,610, tex);
+                leftPointer = new TurnPointer(85, 570, tex, 25, 25);
+                rightPointer = new TurnPointer(WIDTH-100, 570, tex, 25, 25);
+//                if (player1_turn) {
+//                    leftPointer.setState(1);
+//                    rightPointer.setState(0);
+//                } else if (player2_turn) {
+//                    leftPointer.setState(0);
+//                    rightPointer.setState(1);  
+//                }
+                //////////////////////////////////////////////////////////////////////
                 State = State.GAME;
             }
         
@@ -478,7 +495,7 @@ public class Game extends Canvas implements Runnable {
     //            c.addEntity(new MacBook(p1.getX(), p1.getY(), angle, force, tex));
 
     //            if (throwing) {
-                System.out.println("p1_turn");
+//                System.out.println("p1_turn");
                     player1_turn = false;
                     player2_turn = true;
     //            }
@@ -487,7 +504,7 @@ public class Game extends Canvas implements Runnable {
             } else if (player2_turn) {
     //            c.addEntity(new Bullet(p2.getX(), p2.getY(), tex, this, c));
     //            c.addEntity(new MacBook(p2.getX(), p2.getY(), angle, force, tex));
-                System.out.println("p2_turn");
+//                System.out.println("p2_turn");
                 player1_turn = true;
                 player2_turn = false;
             }
