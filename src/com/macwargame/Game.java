@@ -34,7 +34,7 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage bg_select = null;
     private BufferedImage ss_object = null;
     private BufferedImage ss_head = null;
-    private BufferedImage ss_pointer = null
+    private BufferedImage ss_pointer = null;
     
     private BufferedImage ss_clock = null;
     protected static Timer clock_counter;
@@ -120,17 +120,9 @@ public class Game extends Canvas implements Runnable {
         p1_head = new Head(169-47, 398-39, tex);
         p2_head = new Head(898-40, 398-39, tex);
         
-        lp1 = new Lifepoint(50, 25, tex, 1);
-        lp2 = new Lifepoint(WIDTH-470, 25, tex, 2);
 
-        ck = new Clock((WIDTH-940)/2 +410, 15, tex, this);
-        clock_counter = new Timer(1000, ck);
-        clock_counter.start();
 
-        c = new Controller(this, tex);
 
-        ea = c.getEntityA();
-        eb = c.getEntityB();
 
         this.addKeyListener(new KeyInput(this));
         this.addMouseListener(new MouseInput(this));
@@ -351,13 +343,18 @@ public class Game extends Canvas implements Runnable {
                 p2 = new Player2(WIDTH-140,610, tex);
                 leftPointer = new TurnPointer(85, 570, tex, 25, 25);
                 rightPointer = new TurnPointer(WIDTH-100, 570, tex, 25, 25);
-//                if (player1_turn) {
-//                    leftPointer.setState(1);
-//                    rightPointer.setState(0);
-//                } else if (player2_turn) {
-//                    leftPointer.setState(0);
-//                    rightPointer.setState(1);  
-//                }
+                
+                c = new Controller(this, tex);
+
+                ea = c.getEntityA();
+                eb = c.getEntityB();
+                
+                lp1 = new Lifepoint(50, 25, tex, 1);
+                lp2 = new Lifepoint(WIDTH-470, 25, tex, 2);
+
+                ck = new Clock((WIDTH-940)/2 +410, 15, tex, this);
+                clock_counter = new Timer(1000, ck);
+                clock_counter.start();
                 //////////////////////////////////////////////////////////////////////
                 State = State.GAME;
             }
@@ -400,70 +397,7 @@ public class Game extends Canvas implements Runnable {
             }
         }
         
-        
-        /*
-        else if (State == STATE.SELECT) {
-           
-            if (p1_select_turn){
-                if (my >= 222 && my <= 420) {
-                        //select female
-                    if (mx >= 438 && mx <= 634) {
-                        p1_head.setHead(0);
-                        p1_tex = "sprite-2_left";
-                        p1_select_turn = false;
-                        p2_select_turn = true;
-                        System.out.println(p1_tex);
-                    }
-                    //select male
-                    else if (mx >= 647 && mx <= 842) {
-                        p1_head.setHead(1);
-                        p1_tex = "sprite-1_left";
-                        p1_select_turn = false;
-                        p2_select_turn = true;
-                        System.out.println(p1_tex);
-                    }
-                }
-            } else if (p2_select_turn) {
-                if (my >= 222 && my <= 420) {
-                    //select female
-                    if (mx >= 438 && mx <= 634) {
-                        p2_head.setHead(0);
-                        p2_tex = "sprite-2_right";
-                        p2_select_turn = false;
-                        p1_select_turn = true;
-                        System.out.println(p2_tex);
-                    }
-                    //select male
-                    else if (mx >= 647 && mx <= 842) {
-                        p2_head.setHead(1);
-                        p2_tex = "sprite-1_right";
-                        p2_select_turn = false;
-                        p1_select_turn = true;
-                        System.out.println(p2_tex);
-                    }
-                }              
-            }
-            //confirm button
-            if (mx >= 496 && mx <= 792 && my >= 535 && my <= 660) {
-                System.out.println("p1_tex : "+p1_tex);
-                System.out.println("p2_tex : "+p2_tex);
-                try {
-                    ss_player1 = loader.loadImage("img/"+p1_tex+".png");
-                    ss_player2 = loader.loadImage("img/"+p2_tex+".png");
-                    tex.getTextures(this);
-                } catch(IOException er) {
-                    er.printStackTrace();
-                }
-                p1 = new Player1(50,610, tex);
-                throwAnimation = new Timer(50, new ThrowingAnim(tex));
-
-                p2 = new Player2(WIDTH-140,610, tex);
-                State = State.GAME;
-            }
-
-        }
-        
-     */   
+ 
         else if (State == STATE.GAME) {
             mp_x = e.getX();
             mp_y = e.getY();
@@ -486,9 +420,10 @@ public class Game extends Canvas implements Runnable {
 
             o_side = Math.sqrt(Math.pow(mp_x-mp_x, 2) + Math.pow(mp_y - mr_y, 2));
 
-            angle = Math.asin(o_side/force);
+            angle = Math.toDegrees(Math.asin(o_side/force));
 
-
+            System.out.println("Angle is "+angle);
+            System.out.println("Force is "+force);
 
             if (player1_turn) {
     //            c.addEntity(new Bullet(p1.getX(), p1.getY(), tex, this, c));

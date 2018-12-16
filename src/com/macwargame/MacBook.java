@@ -19,33 +19,57 @@ public class MacBook extends GameObject implements EntityB{
     private double angle;
     private Textures tex;
     private double force;
+    private Controller c;
+    
+    private int seconds = 0;
+    private double mili = 0;
     
     private BufferedImage Macbook;
 
-    public MacBook(double x, double y, double angle, double force, Textures tex) {
+    public MacBook(double x, double y, double angle, double force, Textures tex, Controller c) {
         super(x, y);
         
         this.angle = angle;
         this.force = force;
         this.tex = tex;
+        this.c = c;
         
         Macbook = tex.macbook[0];
     }
 
     @Override
     public void tick() {
-        //projectile's move //TODO need collision check 
-        if (Game.player1_turn && !Game.player2_turn) {
-//            System.out.println("p1's turn");
-            x--;
-        }
-        if (!Game.player1_turn && Game.player2_turn) {
-//            System.out.println("p2's turn");
-            x++;
-        }
-//        y += (int)(x*Math.tan(Math.toRadians(angle))-(-9.8*x/2 * Math.pow(force, 2)* Math.pow(Math.cos(Math.toRadians(angle)), 2)));
-        y-=2;
+        mili+=0.01666667;
         
+        //projectile's move //TODO need collision check 
+        if (Game.player1_turn) {
+//            System.out.println("p1's turn");
+//            x--;
+            x -= (int)(20*Math.cos(Math.toRadians(angle)));
+//            System.out.println("x= "+x);
+        }
+        if (Game.player2_turn) {
+//            System.out.println("p2's turn");
+//            x++;
+            x += (int)(20*Math.cos(Math.toRadians(angle)));
+//            System.out.println("x= "+x);
+        }        
+        
+        y -= (20*Math.sin(Math.toRadians(angle))-(9.8*mili));
+//        System.out.println("y= "+y);
+        
+        
+        //bounds
+        if (x > 1286 || x < 0) {
+            c.removeEntity(this);
+            mili = 0;
+            System.out.println("DELETED.");
+        }
+        if (y > 697) {
+            c.removeEntity(this);
+            mili = 0;
+            System.out.println("DELETED.");
+        }
     }
     
     public Rectangle getBounds(int width, int height) {

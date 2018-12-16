@@ -120,12 +120,8 @@ class ProjectileShooter
         }
         projectile = new Projectile();
 
-        Point2D velocity =
-                AffineTransform.getRotateInstance(angleRad).
-                        transform(new Point2D.Double(1,0), null);
-        velocity.setLocation(
-                velocity.getX() * power * 0.5,
-                velocity.getY() * power * 0.5);
+        Point2D velocity = AffineTransform.getRotateInstance(angleRad).transform(new Point2D.Double(1,0), null);
+        velocity.setLocation(velocity.getX() * power * 0.5, velocity.getY() * power * 0.5);
         projectile.setVelocity(velocity);
 
         //System.out.println("Initial "+velocity);
@@ -189,9 +185,7 @@ class Projectile
         //System.out.println("Now at "+position+" with "+velocity);
     }
 
-    private static void scaleAddAssign(
-            Point2D result, double factor, Point2D addend)
-    {
+    private static void scaleAddAssign(Point2D result, double factor, Point2D addend){
         double x = result.getX() + factor * addend.getX();
         double y = result.getY() + factor * addend.getY();
         result.setLocation(x, y);

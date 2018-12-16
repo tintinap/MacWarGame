@@ -30,24 +30,24 @@ public class Bullet extends GameObject implements EntityB {
 
     public void tick() {
         if (Game.player1_turn) {
-            System.out.println("p1_turn");
+//            System.out.println("p1_turn");
             x-=10;
         }
         if (Game.player2_turn) {
-            System.out.println("p2_turn");
+//            System.out.println("p2_turn");
             x+=10;
         }
 //        y -= 10;
         
+        
         if (Physics.Collision(this, game.ea)) {
-            c.removeEntity(this);
+//            c.removeEntity(this);
+            System.out.println("COLLISION DETECTED");
         }
         
         if (x > 1286 || x < 0) c.removeEntity(this);
 
-//        if (Physics.Collision(this, game.eb)) {
-//            System.out.println("COLLISION DETECTED!!");
-//        }
+
 
 //        anim.runAnimation();
     }

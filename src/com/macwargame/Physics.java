@@ -9,7 +9,7 @@ public class Physics {
 
     public static boolean Collision(EntityA entA, LinkedList<EntityB> entB) {
         for(int i = 0; i <entB.size(); i++) {
-            if (entA.getBounds(100, 100).intersects(entB.get(i).getBounds(100, 100))) {
+            if (entA.getBounds(100, 100).intersects(entB.get(i).getBounds(70, 70))) {
                 return true;
             }
         }
@@ -18,7 +18,7 @@ public class Physics {
 
     public static boolean Collision(EntityB entB, LinkedList<EntityA> entA) {
         for(int i = 0; i <entA.size(); i++) {
-            if (entB.getBounds(32, 32).intersects(entA.get(i).getBounds(300, 300))) {
+            if (entB.getBounds(70, 70).intersects(entA.get(i).getBounds(100, 100))) {
                 return true;
             }
         }
