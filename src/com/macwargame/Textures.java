@@ -13,6 +13,7 @@ public class Textures {
     
     public BufferedImage[] head = new BufferedImage[2];
     public BufferedImage[] sframe = new BufferedImage[1];
+    public BufferedImage[] pointer = new BufferedImage[1];
     
     public BufferedImage[] lifepoint1 = new BufferedImage[4];
     public BufferedImage[] lifepoint2 = new BufferedImage[4];
@@ -30,10 +31,13 @@ public class Textures {
     
     private SpriteSheet sshead = null;
     private SpriteSheet ssselectframe = null;
+    
+    private SpriteSheet sspt = null;
 
     
     public Textures(Game game) {
-
+        sspt = new SpriteSheet(game.getSpritePointer());
+                
         ssselectframe = new SpriteSheet(game.getSpriteSelectFrame());
         sshead = new SpriteSheet(game.getSpriteHead());
         
@@ -46,6 +50,8 @@ public class Textures {
     }
     
     public void setMenuTextures(Game game) {
+        pointer[0] = sspt.grabImage(0,0,66,57);
+        
         sframe[0] = ssselectframe.grabImage(0, 0, 300, 300);// SelectFrame
         head[0] = sshead.grabImage(0, 0, 300, 300);//female
         head[1] = sshead.grabImage(300, 0, 300, 300);//male

@@ -34,6 +34,7 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage bg_select = null;
     private BufferedImage ss_object = null;
     private BufferedImage ss_head = null;
+    private BufferedImage ss_pointer = null
     
     private BufferedImage ss_clock = null;
     protected static Timer clock_counter;
@@ -55,6 +56,12 @@ public class Game extends Canvas implements Runnable {
     
     private String p1_tex = "sprite-1_left";
     private String p2_tex = "sprite-2_right";
+    
+    private SelectFrame leftSelectFrame;
+    private SelectFrame rightSelectFrame;
+    
+    private TurnPointer leftPointer;
+    private TurnPointer rightPointer;
     
     
     protected static boolean clicked =  false;
@@ -93,9 +100,7 @@ public class Game extends Canvas implements Runnable {
             ss_head = loader.loadImage("img/select_head.png");
             select_frame = loader.loadImage("img/select_frame.png");
             //when launch select
-//            ss_player1 = loader.loadImage("img/sprite-1_left.png");
-//            ss_player2 = loader.loadImage("img/sprite-2_right.png");
- 
+            ss_pointer = loader.loadImage("img/pointer.png");
             ss_lp  = loader.loadImage("img/LP.png");
             
             bg_game = loader.loadImage("img/game_bg.png");
@@ -108,8 +113,11 @@ public class Game extends Canvas implements Runnable {
         
         tex = new Textures(this);
         
-//        greenSelectFrame1 = new SelectFrame();
-//        greenSelectFrame2 = new SelectFrame();
+        leftPointer = new TurnPointer(85, 570, tex, 25, 25);
+        rightPointer = new TurnPointer(WIDTH-100, 570, tex, 25, 25);
+        leftSelectFrame = new SelectFrame(420, 222,tex, 205,205);
+        rightSelectFrame = new SelectFrame(666, 222,tex, 205,205);
+        rightSelectFrame.setState(0);
         p1_head = new Head(169-47, 398-39, tex);
         p2_head = new Head(898-40, 398-39, tex);
         
@@ -125,6 +133,7 @@ public class Game extends Canvas implements Runnable {
         ea = c.getEntityA();
         eb = c.getEntityB();
 
+        this.addKeyListener(new KeyInput(this));
         this.addMouseListener(new MouseInput(this));
         
 
@@ -244,6 +253,8 @@ public class Game extends Canvas implements Runnable {
             lp1.render(g);
             lp2.render(g);
             ck.render(g);
+            leftPointer.render(g);
+            rightPointer.render(g);
             
         } else if (State == STATE.MENU) {
             g.drawImage(bg_menu, 0, 0, getWidth(), getHeight(),null);
@@ -253,6 +264,8 @@ public class Game extends Canvas implements Runnable {
             g.drawImage(bg_select, 0, 0, getWidth(), getHeight(), null);
             p1_head.render(g);
             p2_head.render(g);
+            leftSelectFrame.render(g);
+            rightSelectFrame.render(g);
         }
 
         //////////////////////////////////
@@ -263,7 +276,76 @@ public class Game extends Canvas implements Runnable {
 
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
+        //start state  = 1 0
+        if (State == STATE.SELECT) {
 
+            //choose
+            if (key == KeyEvent.VK_LEFT) {
+                System.out.println("pressed1");
+                leftSelectFrame.setState(1);
+                rightSelectFrame.setState(0);
+            } else if (key == KeyEvent.VK_RIGHT) {
+                System.out.println("pressed2");
+                leftSelectFrame.setState(0);
+                rightSelectFrame.setState(1);
+            }
+
+            if (p1_select_turn) {
+                if(leftSelectFrame.checkTexture()) {
+                    if(key == KeyEvent.VK_SPACE) {
+                        p1_head.setHead(0);
+                        p1_tex = "sprite-2_left";
+                        p1_select_turn = false;
+                        p2_select_turn = true;
+                        System.out.println(p1_tex);
+                    }
+                } else if(rightSelectFrame.checkTexture()) {
+                    if(key == KeyEvent.VK_SPACE) {
+                        p1_head.setHead(1);
+                        p1_tex = "sprite-1_left";
+                        p1_select_turn = false;
+                        p2_select_turn = true;
+                        System.out.println(p1_tex);
+                    }
+                }
+            } else if (p2_select_turn) {
+                if(leftSelectFrame.checkTexture()) {
+                    if(key == KeyEvent.VK_SPACE) {
+                        p2_head.setHead(0);
+                        p2_tex = "sprite-2_right";
+                        p2_select_turn = false;
+                        p1_select_turn = true;
+                        System.out.println(p2_tex);
+                    }
+                } else if(rightSelectFrame.checkTexture()) {
+                    if(key == KeyEvent.VK_SPACE) {
+                        p2_head.setHead(1);
+                        p2_tex = "sprite-1_right";
+                        p2_select_turn = false;
+                        p1_select_turn = true;
+                        System.out.println(p2_tex);
+                    }
+                }
+            }
+            //confirm
+            if (key == KeyEvent.VK_ENTER) {
+                System.out.println("p1_tex : "+p1_tex);
+                System.out.println("p2_tex : "+p2_tex);
+                try {
+                    ss_player1 = loader.loadImage("img/"+p1_tex+".png");
+                    ss_player2 = loader.loadImage("img/"+p2_tex+".png");
+                    tex.getTextures(this);
+                } catch(IOException er) {
+                    er.printStackTrace();
+                }
+                p1 = new Player1(50,610, tex);
+                throwAnimation = new Timer(50, new ThrowingAnim(tex));
+
+                p2 = new Player2(WIDTH-140,610, tex);
+                State = State.GAME;
+            }
+        
+        }
     }
 
     public void keyReleased(KeyEvent e) {
@@ -302,12 +384,9 @@ public class Game extends Canvas implements Runnable {
         }
         
         
-        
+        /*
         else if (State == STATE.SELECT) {
-            
-//            p1_tex = "sprite-1_left";
-//            p2_tex = "sprite-1_right";
-
+           
             if (p1_select_turn){
                 if (my >= 222 && my <= 420) {
                         //select female
@@ -367,7 +446,7 @@ public class Game extends Canvas implements Runnable {
 
         }
         
-        
+     */   
         else if (State == STATE.GAME) {
             mp_x = e.getX();
             mp_y = e.getY();
@@ -449,6 +528,10 @@ public class Game extends Canvas implements Runnable {
     
     public BufferedImage getSpriteSelectFrame() {
         return select_frame;
+    }
+    
+    public BufferedImage getSpritePointer() {
+        return ss_pointer;
     }
     
     public BufferedImage getSpriteHead() {
