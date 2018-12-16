@@ -41,7 +41,7 @@ public class Game extends Canvas implements Runnable {
     
     ///////////////////////////////////////Mouse x, y///////////////////////////////
     private double mp_x, mp_y, mr_x, mr_y;
-    private double force, angle, o_side;
+    private double force, angle, o_side, forceA;
 
     protected static Timer throwAnimation;
     
@@ -416,11 +416,19 @@ public class Game extends Canvas implements Runnable {
         if (State == STATE.GAME) {
             mr_x = e.getX();
             mr_y = e.getY();
-            force = Math.sqrt(Math.pow(mp_x - mr_x, 2) + Math.pow(mp_y - mr_y, 2));
-
+            forceA = (Math.sqrt(Math.pow(mp_x - mr_x, 2) + Math.pow(mp_y - mr_y, 2)));
+            force = (Math.sqrt(Math.pow(mp_x - mr_x, 2) + Math.pow(mp_y - mr_y, 2)))*0.05;
             o_side = Math.sqrt(Math.pow(mp_x-mp_x, 2) + Math.pow(mp_y - mr_y, 2));
 
-            angle = Math.toDegrees(Math.asin(o_side/force));
+            angle = Math.toDegrees(Math.asin(o_side/forceA));
+            
+            if (Double.isNaN(angle)) {
+                angle = 0;
+            }
+            
+            if (force >= 20) {
+                force = 20;
+            }
 
             System.out.println("Angle is "+angle);
             System.out.println("Force is "+force);

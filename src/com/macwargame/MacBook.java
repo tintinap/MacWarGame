@@ -40,23 +40,20 @@ public class MacBook extends GameObject implements EntityB{
     @Override
     public void tick() {
         mili+=0.01666667;
-        
-        //projectile's move //TODO need collision check 
+
         if (Game.player1_turn) {
-//            System.out.println("p1's turn");
-//            x--;
-            x -= (int)(20*Math.cos(Math.toRadians(angle)));
-//            System.out.println("x= "+x);
+
+            x -= (int)(force*Math.cos(Math.toRadians(angle)));
+
         }
         if (Game.player2_turn) {
-//            System.out.println("p2's turn");
-//            x++;
-            x += (int)(20*Math.cos(Math.toRadians(angle)));
-//            System.out.println("x= "+x);
+
+            x += (int)(force*Math.cos(Math.toRadians(angle)));
+
         }        
         
-        y -= (20*Math.sin(Math.toRadians(angle))-(9.8*mili));
-//        System.out.println("y= "+y);
+        y -= (force*Math.sin(Math.toRadians(angle))-(9.8*mili));
+
         
         
         //bounds
