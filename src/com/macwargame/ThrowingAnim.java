@@ -32,7 +32,7 @@ public class ThrowingAnim implements ActionListener {
                     act1 = 0;
                     Player1.player1 = tex.player1[0];
                     Game.throwAnimation.stop();
-                    Game.clock_counter.start();
+//                    Game.clock_counter.start(); //might change position
                 }
             }
             // 3 to 1
@@ -43,7 +43,7 @@ public class ThrowingAnim implements ActionListener {
                     act2 = 4;
                     Player2.player2 = tex.player2[4];
                     Game.throwAnimation.stop();
-                    Game.clock_counter.start();
+//                    Game.clock_counter.start(); //might change position
                 }
             }
         }

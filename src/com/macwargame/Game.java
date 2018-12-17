@@ -434,20 +434,9 @@ public class Game extends Canvas implements Runnable {
             System.out.println("Force is "+force);
 
             if (player1_turn) {
-    //            c.addEntity(new Bullet(p1.getX(), p1.getY(), tex, this, c));
-    //            c.addEntity(new MacBook(p1.getX(), p1.getY(), angle, force, tex));
-
-    //            if (throwing) {
-//                System.out.println("p1_turn");
                     player1_turn = false;
                     player2_turn = true;
-    //            }
-
-
             } else if (player2_turn) {
-    //            c.addEntity(new Bullet(p2.getX(), p2.getY(), tex, this, c));
-    //            c.addEntity(new MacBook(p2.getX(), p2.getY(), angle, force, tex));
-//                System.out.println("p2_turn");
                 player1_turn = true;
                 player2_turn = false;
             }
