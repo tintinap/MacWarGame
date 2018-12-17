@@ -10,9 +10,11 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 public class Game extends Canvas implements Runnable {
     public static final int WIDTH = 1286;
@@ -41,6 +43,8 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage ss_object = null;
     private BufferedImage ss_head = null;
     private BufferedImage ss_pointer = null;
+    
+    private static BufferedImage icon = null;
     
     private BufferedImage ss_clock = null;
     protected static Timer clock_counter;
@@ -552,6 +556,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void main(String args[]) {
+        BufferedImageLoader iconloader = new BufferedImageLoader();
         Game game = new Game();
 
         game.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -560,6 +565,13 @@ public class Game extends Canvas implements Runnable {
         frame.add(game);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        try {
+            icon = iconloader.loadImage("img/mac.png");
+//            BufferedImage image = ImageIO.read(icon);
+            frame.setIconImage(icon);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
