@@ -522,7 +522,7 @@ public class Game extends Canvas implements Runnable {
             mr_x = e.getX();
             mr_y = e.getY();
             distance = (Math.sqrt(Math.pow(mp_x - mr_x, 2) + Math.pow(mp_y - mr_y, 2)));
-            force = (Math.sqrt(Math.pow(mp_x - mr_x, 2) + Math.pow(mp_y - mr_y, 2)))*0.16;
+            force = (Math.sqrt(Math.pow(mp_x - mr_x, 2) + Math.pow(mp_y - mr_y, 2)))* 0.16;
             o_side = Math.sqrt(Math.pow(mp_x-mp_x, 2) + Math.pow(mp_y - mr_y, 2));
 
             angle = Math.toDegrees(Math.asin(o_side/distance));
@@ -567,7 +567,6 @@ public class Game extends Canvas implements Runnable {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         try {
             icon = iconloader.loadImage("img/mac.png");
-//            BufferedImage image = ImageIO.read(icon);
             frame.setIconImage(icon);
         } catch (IOException e) {
             e.printStackTrace();
