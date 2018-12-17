@@ -211,6 +211,8 @@ public class Game extends Canvas implements Runnable {
                     } else if (player2_turn){
                         System.out.println(updates + " Ticks, Fps " + frames + " Game.State == GAME Turn: player2");
                     }
+                } else if (State == State.WINNER){
+                     System.out.println(updates + " Ticks, Fps " + frames + " Game.State == WINNER");
                 }
                 
                 updates = 0;
