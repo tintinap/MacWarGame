@@ -56,15 +56,15 @@ public class Textures {
         head[0] = sshead.grabImage(0, 0, 300, 300);//female
         head[1] = sshead.grabImage(300, 0, 300, 300);//male
         
-        lifepoint1[0] = sslp.grabLPImage(0,0);
-        lifepoint1[1] = sslp.grabLPImage(0,100);
-        lifepoint1[2] = sslp.grabLPImage(0,200);
-        lifepoint1[3] = sslp.grabLPImage(0,300);
+        lifepoint1[0] = sslp.grabLPImage(0,0); //full
+        lifepoint1[1] = sslp.grabLPImage(0,100); //full-1
+        lifepoint1[2] = sslp.grabLPImage(0,200); //full-2
+        lifepoint1[3] = sslp.grabLPImage(0,300); //empty
 
-        lifepoint2[0] = sslp.grabLPImage(420,0); // must be (2,2)
-        lifepoint2[1] = sslp.grabLPImage(420,100);
-        lifepoint2[2] = sslp.grabLPImage(420,200);
-        lifepoint2[3] = sslp.grabLPImage(420,300);
+        lifepoint2[0] = sslp.grabLPImage(420,0); //full
+        lifepoint2[1] = sslp.grabLPImage(420,100); //full-1
+        lifepoint2[2] = sslp.grabLPImage(420,200); //full-2
+        lifepoint2[3] = sslp.grabLPImage(420,300); //empty
        
 
         int count = 0;

@@ -11,6 +11,8 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Game extends Canvas implements Runnable {
     public static final int WIDTH = 1286;
@@ -18,6 +20,7 @@ public class Game extends Canvas implements Runnable {
     public final String TITLE = "Mac War Game";
 
     private boolean running = false;
+
     protected static boolean throwing_p1 = false;
     protected static boolean throwing_p2 = false;
     protected static boolean recieving = true;
@@ -51,8 +54,8 @@ public class Game extends Canvas implements Runnable {
     
     protected static Player1 p1;
     protected static Player2 p2;
-    protected static Head p1_head;
-    protected static Head p2_head;
+    private  Head p1_head;
+    private  Head p2_head;
     protected static boolean player1_turn = true;
     protected static boolean player2_turn = false;
     private Boolean p1_select_turn = true;
@@ -60,6 +63,9 @@ public class Game extends Canvas implements Runnable {
     
     private String p1_tex = "sprite-1_left";
     private String p2_tex = "sprite-2_right";
+    
+    private Head winner_head;
+     private Head winner_head2;
     
     private SelectFrame leftSelectFrame;
     private SelectFrame rightSelectFrame;
@@ -86,12 +92,14 @@ public class Game extends Canvas implements Runnable {
     
     
     BufferedImageLoader loader = new BufferedImageLoader();
+    private String winner;
 
     public static enum STATE {
         MENU,
         SELECT,
         GAME,
-        TUTORIAL
+        TUTORIAL,
+        WINNER
     };
 
     public static STATE State = STATE.MENU;
@@ -125,6 +133,9 @@ public class Game extends Canvas implements Runnable {
         rightSelectFrame.setState(0);
         p1_head = new Head(169-47, 398-39, tex);
         p2_head = new Head(898-40, 398-39, tex);
+        
+        winner_head = new Head(493, 307,tex);
+        winner_head2 = new Head(493, 307, tex);
         
 
 
@@ -227,8 +238,19 @@ public class Game extends Canvas implements Runnable {
                 leftPointer.setState(0);
                 rightPointer.setState(1);
             }
-            
-//            if (throwing_p1 || throwing_p2) recieving = false;
+            if (lp1hpValue == 0 || lp2hpValue == 0)  {
+                if (lp1hpValue == 0) {
+                    winner = "p2";
+                    winner_head2.setX(500);
+                    winner_head2.setY(357-25);
+                } else if (lp2hpValue == 0) {
+                    winner = "p1";
+                    winner_head.setX(500);
+                    winner_head.setY(357-25);
+                }
+
+                State = STATE.WINNER;
+            }
         }
 
     }
@@ -272,6 +294,17 @@ public class Game extends Canvas implements Runnable {
             p2_head.render(g);
             leftSelectFrame.render(g);
             rightSelectFrame.render(g);
+        } else if (State == STATE.WINNER) {
+            try {
+                g.drawImage(loader.loadImage("img/"+winner+"_winner.png"), 0, 0, getWidth(), getHeight(), null);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            if (winner == "p1") {
+                winner_head.render(g);
+            } else if(winner == "p2") {
+                winner_head2.render(g);
+            }
         }
 
         //////////////////////////////////
@@ -300,6 +333,8 @@ public class Game extends Canvas implements Runnable {
                 if(leftSelectFrame.checkTexture()) {
                     if(key == KeyEvent.VK_SPACE) {
                         p1_head.setHead(0);
+                        winner_head = p1_head;
+
                         p1_tex = "sprite-2_left";
                         p1_select_turn = false;
                         p2_select_turn = true;
@@ -308,6 +343,8 @@ public class Game extends Canvas implements Runnable {
                 } else if(rightSelectFrame.checkTexture()) {
                     if(key == KeyEvent.VK_SPACE) {
                         p1_head.setHead(1);
+                        winner_head = p1_head;
+
                         p1_tex = "sprite-1_left";
                         p1_select_turn = false;
                         p2_select_turn = true;
@@ -318,6 +355,8 @@ public class Game extends Canvas implements Runnable {
                 if(leftSelectFrame.checkTexture()) {
                     if(key == KeyEvent.VK_SPACE) {
                         p2_head.setHead(0);
+                        winner_head2 = p2_head;
+
                         p2_tex = "sprite-2_right";
                         p2_select_turn = false;
                         p1_select_turn = true;
@@ -326,6 +365,8 @@ public class Game extends Canvas implements Runnable {
                 } else if(rightSelectFrame.checkTexture()) {
                     if(key == KeyEvent.VK_SPACE) {
                         p2_head.setHead(1);
+                        winner_head2 = p2_head;
+
                         p2_tex = "sprite-1_right";
                         p2_select_turn = false;
                         p1_select_turn = true;
@@ -335,6 +376,14 @@ public class Game extends Canvas implements Runnable {
             }
             //confirm
             if (key == KeyEvent.VK_ENTER) {
+                if (p1_tex == "sprite-1_left") {
+                    p1_head.setHead(1);
+                    winner_head = p1_head;
+                }
+                if (p2_tex == "sprite-2_right") {
+                    p2_head.setHead(0);
+                    winner_head2 = p2_head;
+                }
                 System.out.println("p1_tex : "+p1_tex);
                 System.out.println("p2_tex : "+p2_tex);
                 try {
@@ -414,6 +463,55 @@ public class Game extends Canvas implements Runnable {
 
             if (player2_turn && !throwing_p1 && !throwing_p2) Player2.player2 = tex.player2[3];
         }
+        
+        
+        else if (State == STATE.WINNER){
+            if (mx >= 1194 && mx <= 1252 && my >= 33 && my <= 92) {
+                //reset all
+                lp1hpValue = 3;
+                lp2hpValue = 3;
+                p1_head.setHead(3);
+                p2_head.setHead(3);
+                
+                winner_head.setHead(3);
+                winner_head2.setHead(3);
+//                        p1_head = new Head(169-47, 398-39, tex);
+//        p2_head = new Head(898-40, 398-39, tex);
+                if (winner_head == p1_head){
+                    winner_head.setX(169-47);
+                    winner_head.setY(398-39);
+                } else if (winner_head == p2_head){
+                    winner_head.setX(898-40);
+                    winner_head.setY(398-39);
+                }
+                
+                if (winner_head2 == p1_head){
+                    winner_head2.setX(169-47);
+                    winner_head2.setY(398-39);
+                } else if (winner_head2 == p2_head){
+                    winner_head2.setX(898-40);
+                    winner_head2.setY(398-39);
+                }
+                
+                player1_turn = true;
+                player2_turn = false;
+                
+                p1_select_turn = true;
+                p2_select_turn = false;
+                
+                throwing_p1 = false;
+                throwing_p2 = false;
+                recieving = true;
+                
+                clicked =  false;
+                
+                p1_tex = "sprite-1_left";
+                p2_tex = "sprite-2_right";
+                
+                
+               State = STATE.MENU;
+            }
+        }
     }
     
     public void mouseReleased(MouseEvent e) {
@@ -424,7 +522,7 @@ public class Game extends Canvas implements Runnable {
             mr_x = e.getX();
             mr_y = e.getY();
             distance = (Math.sqrt(Math.pow(mp_x - mr_x, 2) + Math.pow(mp_y - mr_y, 2)));
-            force = (Math.sqrt(Math.pow(mp_x - mr_x, 2) + Math.pow(mp_y - mr_y, 2)))*0.05;
+            force = (Math.sqrt(Math.pow(mp_x - mr_x, 2) + Math.pow(mp_y - mr_y, 2)))*0.16;
             o_side = Math.sqrt(Math.pow(mp_x-mp_x, 2) + Math.pow(mp_y - mr_y, 2));
 
             angle = Math.toDegrees(Math.asin(o_side/distance));
@@ -450,6 +548,8 @@ public class Game extends Canvas implements Runnable {
                 
                 player1_turn = true;
                 player2_turn = false;
+                
+
             }
         
         }

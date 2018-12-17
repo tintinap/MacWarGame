@@ -82,8 +82,9 @@ public class MacBook extends GameObject implements EntityB{
         }        
         if (x == startX){
             y = 1000;
-            System.out.println("you cant press twice.");
             c.removeEntity(this);
+            System.out.println("YOU CANT LAUNCH TWICE.");
+            
         } else {
             y -= (force*Math.sin(Math.toRadians(angle))-(9.8*mili));
         }
