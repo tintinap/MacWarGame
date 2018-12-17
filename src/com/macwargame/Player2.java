@@ -10,10 +10,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-/**
- *
- * @author User
- */
+
 public class Player2 extends GameObject implements EntityA{
     
     private Textures tex;

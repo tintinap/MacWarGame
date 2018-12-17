@@ -467,7 +467,7 @@ public class Game extends Canvas implements Runnable {
         
         else if (State == STATE.WINNER){
             if (mx >= 1194 && mx <= 1252 && my >= 33 && my <= 92) {
-                //reset all
+                /*=========================================================reset all==========================================================*/
                 lp1hpValue = 3;
                 lp2hpValue = 3;
                 p1_head.setHead(3);
@@ -475,8 +475,7 @@ public class Game extends Canvas implements Runnable {
                 
                 winner_head.setHead(3);
                 winner_head2.setHead(3);
-//                        p1_head = new Head(169-47, 398-39, tex);
-//        p2_head = new Head(898-40, 398-39, tex);
+
                 if (winner_head == p1_head){
                     winner_head.setX(169-47);
                     winner_head.setY(398-39);
@@ -508,7 +507,7 @@ public class Game extends Canvas implements Runnable {
                 p1_tex = "sprite-1_left";
                 p2_tex = "sprite-2_right";
                 
-                
+                /*=========================================================reset all==========================================================*/
                State = STATE.MENU;
             }
         }

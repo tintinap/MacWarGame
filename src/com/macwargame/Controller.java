@@ -25,22 +25,10 @@ public class Controller {
 
         this.game = game;
         this.tex = tex;
-//        for (int i=0; i < 20; i++) {
-//            addEntity(new Enemy(r.nextInt(Game.WIDTH),100, tex));
-//        }
 
-//        addBullet(new Bullet(100, 760, game));
-        //spwan when the game starts.
-//        for(int x = 0; x < Game.WIDTH; x +=64) {
-//            addEnemy(new Enemy(r.nextInt(Game.WIDTH), 0, tex));
-//        }
     }
 
-//    public void createEnemy(int enemy_count) {
-//        for (int i=0; i<enemy_count; i++) {
-//            addEntity(new Enemy(r.nextInt(Game.WIDTH),100, tex, this, game));
-//        }
-//    }
+
 
     public void tick() {
         // A class

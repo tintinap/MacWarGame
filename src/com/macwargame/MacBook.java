@@ -54,12 +54,13 @@ public class MacBook extends GameObject implements EntityB{
                 mili = 0;
                 System.out.println("HIT P1");
                 //hit anim
-//                Game.hitAnimation.start(); Game.hitAnimation.stop();
-                Game.lp1hpValue--;
-                Game.lp1.setLP(Game.lp1hpValue);
+                Game.hitAnimation.start();
+                
+//                Game.lp1hpValue--;
+//                Game.lp1.setLP(Game.lp1hpValue);
                 Game.throwing_p2 = false;
                 Game.recieving = true;
-                Game.clock_counter.start();                                                                                                                     
+                Game.clock_counter.start(); //might change                                                                                                      
             }
 
         }
@@ -72,12 +73,13 @@ public class MacBook extends GameObject implements EntityB{
                 mili = 0;
                 System.out.println("HIT P2");
                 //hit anim
-//                Game.hitAnimation.start(); Game.hitAnimation.stop();
-                Game.lp2hpValue--;
-                Game.lp2.setLP(Game.lp2hpValue);
+                Game.hitAnimation.start();
+                
+//                Game.lp2hpValue--;
+//                Game.lp2.setLP(Game.lp2hpValue);
                 Game.throwing_p1 = false;
                 Game.recieving = true;
-                Game.clock_counter.start();
+                Game.clock_counter.start(); //might change
             }
         }        
         if (x == startX){
