@@ -18,7 +18,10 @@ public class Game extends Canvas implements Runnable {
     public final String TITLE = "Mac War Game";
 
     private boolean running = false;
-    private boolean throwing = false;
+    protected static boolean throwing_p1 = false;
+    protected static boolean throwing_p2 = false;
+    protected static boolean recieving = true;
+    
     private Thread thread;
 
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -192,7 +195,7 @@ public class Game extends Canvas implements Runnable {
                 } else if (State == State.TUTORIAL) {
                     System.out.println(updates + " Ticks, Fps " + frames + " Game.State == TUTORIAL");
                 } else if (State == State.GAME) {
-                    if (player1_turn){
+                    if (player1_turn){     
                         System.out.println(updates + " Ticks, Fps " + frames + " Game.State == GAME Turn: player1");
                     } else if (player2_turn){
                         System.out.println(updates + " Ticks, Fps " + frames + " Game.State == GAME Turn: player2");
@@ -224,6 +227,8 @@ public class Game extends Canvas implements Runnable {
                 leftPointer.setState(0);
                 rightPointer.setState(1);
             }
+            
+//            if (throwing_p1 || throwing_p2) recieving = false;
         }
 
     }
@@ -405,20 +410,17 @@ public class Game extends Canvas implements Runnable {
         else if (State == STATE.GAME) {
             mp_x = e.getX();
             mp_y = e.getY();
-            if (player1_turn) Player1.player1 = tex.player1[1];
+            if (player1_turn && !throwing_p1 && !throwing_p2) Player1.player1 = tex.player1[1];
 
-            if (player2_turn) Player2.player2 = tex.player2[3];
+            if (player2_turn && !throwing_p1 && !throwing_p2) Player2.player2 = tex.player2[3];
         }
     }
     
     public void mouseReleased(MouseEvent e) {
 
-        
-
-        
         if (State == STATE.GAME) {
             clicked = true;
-            throwing = true;
+            
             mr_x = e.getX();
             mr_y = e.getY();
             distance = (Math.sqrt(Math.pow(mp_x - mr_x, 2) + Math.pow(mp_y - mr_y, 2)));
@@ -439,10 +441,13 @@ public class Game extends Canvas implements Runnable {
             System.out.println("Angle is "+angle);
             System.out.println("Force is "+force);
 
-            if (player1_turn) {
-                    player1_turn = false;
-                    player2_turn = true;
-            } else if (player2_turn) {
+            if (player1_turn && !throwing_p1 && !throwing_p2) {
+                throwing_p1 = true;
+                player1_turn = false;
+                player2_turn = true;
+            } else if (player2_turn && !throwing_p1 && !throwing_p2) {
+                throwing_p2 = true;
+                
                 player1_turn = true;
                 player2_turn = false;
             }

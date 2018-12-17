@@ -24,13 +24,16 @@ public class MacBook extends GameObject implements EntityB{
     private int seconds = 0;
     private double mili = 0;
     
+    private double startX;
+    
     private BufferedImage Macbook;
 
     public MacBook(double x, double y, double angle, double force, Textures tex, Controller c) {
         super(x, y);
-        
+        this.startX = x;
         this.angle = angle;
         this.force = force;
+
         this.tex = tex;
         this.c = c;
         
@@ -41,7 +44,7 @@ public class MacBook extends GameObject implements EntityB{
     public void tick() {
         mili+=0.01666667; //per milisec
 
-        if (Game.player1_turn) {
+        if (Game.player1_turn && !Game.throwing_p1 && Game.throwing_p2) {
 
             x -= (int)(force*Math.cos(Math.toRadians(angle)));
             
@@ -54,12 +57,13 @@ public class MacBook extends GameObject implements EntityB{
 //                Game.hitAnimation.start(); Game.hitAnimation.stop();
                 Game.lp1hpValue--;
                 Game.lp1.setLP(Game.lp1hpValue);
-                
-                Game.clock_counter.start();
+                Game.throwing_p2 = false;
+                Game.recieving = true;
+                Game.clock_counter.start();                                                                                                                     
             }
 
         }
-        if (Game.player2_turn) {
+        else  if (Game.player2_turn && Game.throwing_p1 && !Game.throwing_p2) {
 
             x += (int)(force*Math.cos(Math.toRadians(angle)));
             
@@ -71,11 +75,18 @@ public class MacBook extends GameObject implements EntityB{
 //                Game.hitAnimation.start(); Game.hitAnimation.stop();
                 Game.lp2hpValue--;
                 Game.lp2.setLP(Game.lp2hpValue);
+                Game.throwing_p1 = false;
+                Game.recieving = true;
                 Game.clock_counter.start();
             }
         }        
-        
-        y -= (force*Math.sin(Math.toRadians(angle))-(9.8*mili));
+        if (x == startX){
+            y = 1000;
+            System.out.println("you cant press twice.");
+            c.removeEntity(this);
+        } else {
+            y -= (force*Math.sin(Math.toRadians(angle))-(9.8*mili));
+        }
 
         //players rectangle
 
@@ -85,6 +96,9 @@ public class MacBook extends GameObject implements EntityB{
             c.removeEntity(this);
             mili = 0;
             System.out.println("HIT THE WALL!!!");
+            if(Game.throwing_p2) Game.throwing_p2 = false;
+            if(Game.throwing_p1) Game.throwing_p1 = false;
+            Game.recieving = true;
             Game.clock_counter.start();
         }
         //bounds
@@ -92,12 +106,18 @@ public class MacBook extends GameObject implements EntityB{
             c.removeEntity(this);
             mili = 0;
             System.out.println("DELETED.");
+            if(Game.throwing_p2) Game.throwing_p2 = false;
+            if(Game.throwing_p1) Game.throwing_p1 = false;
+            Game.recieving = true;
             Game.clock_counter.start();
         }
         if (y > 697) {
             c.removeEntity(this);
             mili = 0;
             System.out.println("DELETED.");
+            if(Game.throwing_p2) Game.throwing_p2 = false;
+            if(Game.throwing_p1) Game.throwing_p1 = false;
+            Game.recieving = true;
             Game.clock_counter.start();
         }
     }

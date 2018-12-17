@@ -52,12 +52,18 @@ public class Clock extends GameObject implements ActionListener{
                 Game.clock_counter.stop();
                 Game.clicked = false;
                 if (!Game.player1_turn){
-                    Game.c.addEntity(new MacBook(Game.p1.getX(), Game.p1.getY(), game.getAngle(), game.getForce(), tex, Game.c));
-//                    Game.c.addEntity(new Bullet(Game.p1.getX(), Game.p1.getY(), tex, game, Game.c));
+//                    if (Game.recieving) {
+                        Game.c.addEntity(new MacBook(Game.p1.getX(), Game.p1.getY(), game.getAngle(), game.getForce(), tex, Game.c));
+    //                    Game.c.addEntity(new Bullet(Game.p1.getX(), Game.p1.getY(), tex, game, Game.c));
+//                        Game.recieving = false;
+//                    }
                 }
                 if (!Game.player2_turn){
-                    Game.c.addEntity(new MacBook(Game.p2.getX(), Game.p2.getY(), game.getAngle(), game.getForce(), tex, Game.c));
-//                    Game.c.addEntity(new Bullet(Game.p2.getX()+20, Game.p2.getY(), tex, game, Game.c));
+//                    if (Game.recieving) {
+                        Game.c.addEntity(new MacBook(Game.p2.getX(), Game.p2.getY(), game.getAngle(), game.getForce(), tex, Game.c));
+    //                    Game.c.addEntity(new Bullet(Game.p2.getX()+20, Game.p2.getY(), tex, game, Game.c));
+//                        Game.recieving = false;
+//                    }
                 }
                 Game.throwAnimation.start();
 
