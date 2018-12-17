@@ -84,7 +84,6 @@ public class Game extends Canvas implements Runnable {
     
     protected static Controller c;
     private Textures tex;
-//    private Menu menu;
 
     public LinkedList<EntityA> ea;
     public LinkedList<EntityB> eb;
@@ -127,7 +126,6 @@ public class Game extends Canvas implements Runnable {
         
         tex = new Textures(this);
         
-
         leftSelectFrame = new SelectFrame(420, 222,tex, 205,205);
         rightSelectFrame = new SelectFrame(666, 222,tex, 205,205);
         rightSelectFrame.setState(0);
@@ -137,9 +135,6 @@ public class Game extends Canvas implements Runnable {
         winner_head = new Head(493, 307,tex);
         winner_head2 = new Head(493, 307, tex);
         
-
-
-
 
         this.addKeyListener(new KeyInput(this));
         this.addMouseListener(new MouseInput(this));

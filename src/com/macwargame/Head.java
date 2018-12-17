@@ -7,10 +7,8 @@ package com.macwargame;
 
 import java.awt.image.BufferedImage;
 import java.awt.Graphics;
-/**
- *
- * @author User
- */
+
+
 public class Head extends GameObject{
 
     private Textures tex;
@@ -20,7 +18,6 @@ public class Head extends GameObject{
         super(x, y);
         this.tex = tex;
         
-//        head = tex.head[sex];
         head = null;
     }
     

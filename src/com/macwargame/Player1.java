@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.macwargame;
 
 import com.macwargame.classes.EntityA;
@@ -10,10 +6,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-/**
- *
- * @author User
- */
+
 public class Player1 extends GameObject implements EntityA {
     
     private Textures tex;

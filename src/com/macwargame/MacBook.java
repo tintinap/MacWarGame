@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.macwargame;
 
 import com.macwargame.classes.EntityB;
@@ -10,10 +6,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-/**
- *
- * @author User
- */
+
 public class MacBook extends GameObject implements EntityB{
     
     private double angle;
@@ -56,11 +49,9 @@ public class MacBook extends GameObject implements EntityB{
                 //hit anim
                 Game.hitAnimation.start();
                 
-//                Game.lp1hpValue--;
-//                Game.lp1.setLP(Game.lp1hpValue);
                 Game.throwing_p2 = false;
                 Game.recieving = true;
-                Game.clock_counter.start(); //might change                                                                                                      
+                Game.clock_counter.start();                                                                                                   
             }
 
         }
@@ -74,12 +65,10 @@ public class MacBook extends GameObject implements EntityB{
                 System.out.println("HIT P2");
                 //hit anim
                 Game.hitAnimation.start();
-                
-//                Game.lp2hpValue--;
-//                Game.lp2.setLP(Game.lp2hpValue);
+
                 Game.throwing_p1 = false;
                 Game.recieving = true;
-                Game.clock_counter.start(); //might change
+                Game.clock_counter.start();
             }
         }        
         if (x == startX){
@@ -90,8 +79,6 @@ public class MacBook extends GameObject implements EntityB{
         } else {
             y -= (force*Math.sin(Math.toRadians(angle))-(9.8*mili));
         }
-
-        //players rectangle
 
 
         // obstacle

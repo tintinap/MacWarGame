@@ -16,7 +16,6 @@ public class Controller {
     EntityA entA;
     EntityB entB;
 
-//    Random r = new Random();
     private Game game;
 
     Textures tex;
@@ -27,7 +26,6 @@ public class Controller {
         this.tex = tex;
 
     }
-
 
 
     public void tick() {

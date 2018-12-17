@@ -40,9 +40,6 @@ public class HitAnim implements ActionListener {
                 } else {
                     h1-=4;
                 }
-//                System.out.println("h1 before = "+h1);
-//                h1-=4;
-//                System.out.println("h1 after = "+h1);
             }
             // 0
             if (Game.player2_turn) {
@@ -59,9 +56,6 @@ public class HitAnim implements ActionListener {
                 }else {
                     h2+=4;
                 }
-//                System.out.println("h1 before = "+h1);
-//                h2+=4;
-//                System.out.println("h1 after = "+h1);
             }
         }
     }

@@ -31,7 +31,6 @@ public class SpriteSheet {
     }
     
     public BufferedImage grabObjectImage(int col, int row, int width, int height) {
-        //grab other object 32*32
         BufferedImage img = image.getSubimage((col*32)-32, (row*32)-32, width, height);
         return img;
     }
