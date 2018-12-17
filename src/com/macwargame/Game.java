@@ -431,7 +431,7 @@ public class Game extends Canvas implements Runnable {
                 angle = 0;
             }
             
-            if (force >= 20) {
+            if (force >= 20) { //max Force
                 force = 20;
             }
 

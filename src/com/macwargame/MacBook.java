@@ -52,6 +52,9 @@ public class MacBook extends GameObject implements EntityB{
                 System.out.println("HIT P1");
                 //hit anim
 //                Game.hitAnimation.start(); Game.hitAnimation.stop();
+                Game.lp1hpValue--;
+                Game.lp1.setLP(Game.lp1hpValue);
+                
                 Game.clock_counter.start();
             }
 
@@ -66,6 +69,8 @@ public class MacBook extends GameObject implements EntityB{
                 System.out.println("HIT P2");
                 //hit anim
 //                Game.hitAnimation.start(); Game.hitAnimation.stop();
+                Game.lp2hpValue--;
+                Game.lp2.setLP(Game.lp2hpValue);
                 Game.clock_counter.start();
             }
         }        
