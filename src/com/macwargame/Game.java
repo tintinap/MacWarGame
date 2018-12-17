@@ -41,9 +41,10 @@ public class Game extends Canvas implements Runnable {
     
     ///////////////////////////////////////Mouse x, y///////////////////////////////
     private double mp_x, mp_y, mr_x, mr_y;
-    private double force, angle, o_side, forceA;
+    private double force, angle, o_side, distance;
 
     protected static Timer throwAnimation;
+    protected static Timer hitAnimation;
     
     protected static Player1 p1;
     protected static Player2 p2;
@@ -66,8 +67,10 @@ public class Game extends Canvas implements Runnable {
     
     protected static boolean clicked =  false;
     
-    private Lifepoint lp1;
-    private Lifepoint lp2;
+    protected static Lifepoint lp1;
+    protected static Lifepoint lp2;
+    protected static int lp1hpValue = 3;
+    protected static int lp2hpValue = 3;
     private Clock ck;
     
     protected static Controller c;
@@ -339,6 +342,7 @@ public class Game extends Canvas implements Runnable {
                 //////////////////////////////////////////////////////////////////////
                 p1 = new Player1(50,610, tex);
                 throwAnimation = new Timer(50, new ThrowingAnim(tex));
+                hitAnimation = new Timer (100, new HitAnim(tex));
 
                 p2 = new Player2(WIDTH-140,610, tex);
                 leftPointer = new TurnPointer(85, 570, tex, 25, 25);
@@ -410,17 +414,18 @@ public class Game extends Canvas implements Runnable {
     public void mouseReleased(MouseEvent e) {
 
         
-        clicked = true;
-        throwing = true;
+
         
         if (State == STATE.GAME) {
+            clicked = true;
+            throwing = true;
             mr_x = e.getX();
             mr_y = e.getY();
-            forceA = (Math.sqrt(Math.pow(mp_x - mr_x, 2) + Math.pow(mp_y - mr_y, 2)));
+            distance = (Math.sqrt(Math.pow(mp_x - mr_x, 2) + Math.pow(mp_y - mr_y, 2)));
             force = (Math.sqrt(Math.pow(mp_x - mr_x, 2) + Math.pow(mp_y - mr_y, 2)))*0.05;
             o_side = Math.sqrt(Math.pow(mp_x-mp_x, 2) + Math.pow(mp_y - mr_y, 2));
 
-            angle = Math.toDegrees(Math.asin(o_side/forceA));
+            angle = Math.toDegrees(Math.asin(o_side/distance));
             
             if (Double.isNaN(angle)) {
                 angle = 0;
@@ -430,6 +435,7 @@ public class Game extends Canvas implements Runnable {
                 force = 20;
             }
 
+            System.out.println("Distance is "+distance);
             System.out.println("Angle is "+angle);
             System.out.println("Force is "+force);
 

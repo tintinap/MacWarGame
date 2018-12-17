@@ -46,9 +46,12 @@ public class MacBook extends GameObject implements EntityB{
             x -= (int)(force*Math.cos(Math.toRadians(angle)));
             
 
-            if (x >= 62-50 && x <= 115 && y >= 604-35 && y <= 697) { // player 1 bound
+            if (x >= 62-50 && x <= 115 && y >= 604-40 && y <= 697) { // player 1 bound
                 c.removeEntity(this);
+                mili = 0;
                 System.out.println("HIT P1");
+                //hit anim
+//                Game.hitAnimation.start(); Game.hitAnimation.stop();
                 Game.clock_counter.start();
             }
 
@@ -57,9 +60,12 @@ public class MacBook extends GameObject implements EntityB{
 
             x += (int)(force*Math.cos(Math.toRadians(angle)));
             
-            if (x >= 1158+60 && x <= 1211 && y >= 604-35 && y <= 697) { // player 2 bound
+            if (x >= 1158-60 && x <= 1211 && y >= 604-40 && y <= 697) { // player 2 bound
                 c.removeEntity(this);
+                mili = 0;
                 System.out.println("HIT P2");
+                //hit anim
+//                Game.hitAnimation.start(); Game.hitAnimation.stop();
                 Game.clock_counter.start();
             }
         }        

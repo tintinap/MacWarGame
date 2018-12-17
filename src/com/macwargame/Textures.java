@@ -59,10 +59,12 @@ public class Textures {
         lifepoint1[0] = sslp.grabLPImage(0,0);
         lifepoint1[1] = sslp.grabLPImage(0,100);
         lifepoint1[2] = sslp.grabLPImage(0,200);
+        lifepoint1[3] = sslp.grabLPImage(0,300);
 
         lifepoint2[0] = sslp.grabLPImage(420,0); // must be (2,2)
         lifepoint2[1] = sslp.grabLPImage(420,100);
         lifepoint2[2] = sslp.grabLPImage(420,200);
+        lifepoint2[3] = sslp.grabLPImage(420,300);
        
 
         int count = 0;
