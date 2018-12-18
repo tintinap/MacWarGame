@@ -2,7 +2,7 @@ package com.macwargame;
 
 import com.macwargame.classes.EntityA;
 import com.macwargame.classes.EntityB;
-import com.macwargame.Game;
+import com.macwargame.Main;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -16,11 +16,11 @@ public class Controller {
     EntityA entA;
     EntityB entB;
 
-    private Game game;
+    private Main game;
 
     Textures tex;
 
-    public Controller(Game game, Textures tex) {
+    public Controller(Main game, Textures tex) {
 
         this.game = game;
         this.tex = tex;

@@ -23,9 +23,9 @@ public class HitAnim implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (Game.State == Game.State.GAME) {
+        if (Main.State == Main.State.GAME) {
             //4
-            if (Game.player1_turn) {
+            if (Main.player1_turn) {
                 if (h1 == 4) System.out.println("hit p1!!!1st");
                 if (h1 != 4) System.out.println("hit p1!!! other");
                 Player1.player1 = tex.player1[h1];
@@ -33,16 +33,16 @@ public class HitAnim implements ActionListener {
                     h1 = 4;
                     Player1.player1 = tex.player1[0];
                     System.out.println("p1 gotta stop!!!");
-                    Game.lp1hpValue--;
-                    Game.lp1.setLP(Game.lp1hpValue);
-                    Game.hitAnimation.stop();
+                    Main.lp1hpValue--;
+                    Main.lp1.setLP(Main.lp1hpValue);
+                    Main.hitAnimation.stop();
 
                 } else {
                     h1-=4;
                 }
             }
             // 0
-            if (Game.player2_turn) {
+            if (Main.player2_turn) {
                 if (h2 == 0) System.out.println("hit p2!!!1st");
                 if (h2 != 0) System.out.println("hit p2!!! other");
                 Player2.player2 = tex.player2[h2];
@@ -50,9 +50,9 @@ public class HitAnim implements ActionListener {
                     h2 = 0;
                     Player2.player2 = tex.player2[4];
                     System.out.println("p2 gotta stop!!!");
-                    Game.lp2hpValue--;
-                    Game.lp2.setLP(Game.lp2hpValue);
-                    Game.hitAnimation.stop();
+                    Main.lp2hpValue--;
+                    Main.lp2.setLP(Main.lp2hpValue);
+                    Main.hitAnimation.stop();
                 }else {
                     h2+=4;
                 }

@@ -1,6 +1,6 @@
 package com.macwargame;
 
-import com.macwargame.Game;
+import com.macwargame.Main;
 import com.macwargame.SpriteSheet;
 
 import java.awt.image.BufferedImage;
@@ -35,7 +35,7 @@ public class Textures {
     private SpriteSheet sspt = null;
 
     
-    public Textures(Game game) {
+    public Textures(Main game) {
         sspt = new SpriteSheet(game.getSpritePointer());
                 
         ssselectframe = new SpriteSheet(game.getSpriteSelectFrame());
@@ -49,7 +49,7 @@ public class Textures {
         setMenuTextures(game);
     }
     
-    public void setMenuTextures(Game game) {
+    public void setMenuTextures(Main game) {
         pointer[0] = sspt.grabImage(0,0,66,57);
         
         sframe[0] = ssselectframe.grabImage(0, 0, 300, 300);// SelectFrame
@@ -76,7 +76,7 @@ public class Textures {
         }
     }
 
-    public void getTextures(Game game) {
+    public void getTextures(Main game) {
         ssp1 = new SpriteSheet(game.getSpritePlayer(1));
         ssp2 = new SpriteSheet(game.getSpritePlayer(2));
         

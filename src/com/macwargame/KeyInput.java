@@ -5,8 +5,8 @@ import java.awt.event.KeyEvent;
 
 public class KeyInput extends KeyAdapter {
 
-    Game game;
-    public KeyInput(Game game) {
+    Main game;
+    public KeyInput(Main game) {
         this.game = game;
     }
 

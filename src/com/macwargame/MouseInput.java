@@ -1,6 +1,6 @@
 package com.macwargame;
 
-import com.macwargame.Game;
+import com.macwargame.Main;
 import java.awt.Cursor;
 
 import java.awt.event.MouseEvent;
@@ -8,8 +8,8 @@ import java.awt.event.MouseListener;
 
 public class MouseInput implements MouseListener {
     
-    Game game;
-    public MouseInput(Game game) {
+    Main game;
+    public MouseInput(Main game) {
         this.game = game;
     }
     

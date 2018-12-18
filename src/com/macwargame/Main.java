@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-public class Game extends Canvas implements Runnable {
+public class Main extends Canvas implements Runnable {
     public static final int WIDTH = 1286;
     public static final int HEIGHT = 760;
     public final String TITLE = "Mac War Game";
@@ -460,18 +460,18 @@ public class Game extends Canvas implements Runnable {
         int my = e.getY();
 
         
-        if(Game.State == Game.State.MENU) {
+        if(Main.State == Main.State.MENU) {
             
             if (mx >= 493 && mx <= 793) {
                 // Start button -> state.select
                 if (my >= 290 && my <= 418) {
                     System.out.println("Go to SELECT state");
-                    Game.State = Game.STATE.SELECT;
+                    Main.State = Main.STATE.SELECT;
                 }
                 //Tutorial button ->state.tutorial
                 if (my > 418 && my <= 542) {
                     System.out.println("Go to TURORIAL state");
-                    Game.State = Game.STATE.TUTORIAL;
+                    Main.State = Main.STATE.TUTORIAL;
                 }
                 //Exit button
                 if (my > 542 && my <= 668) {
@@ -592,7 +592,7 @@ public class Game extends Canvas implements Runnable {
 
     public static void main(String args[]) {
         BufferedImageLoader iconloader = new BufferedImageLoader();
-        Game game = new Game();
+        Main game = new Main();
 
         game.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 

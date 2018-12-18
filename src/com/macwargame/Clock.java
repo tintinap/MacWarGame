@@ -5,9 +5,9 @@
  */
 package com.macwargame;
 
-import static com.macwargame.Game.WIDTH;
-import static com.macwargame.Game.player1_turn;
-import static com.macwargame.Game.player2_turn;
+import static com.macwargame.Main.WIDTH;
+import static com.macwargame.Main.player1_turn;
+import static com.macwargame.Main.player2_turn;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,10 +20,10 @@ public class Clock extends GameObject implements ActionListener{
     private Textures tex;
     private BufferedImage clock;
     protected static int ckindex;
-    private Game game;
+    private Main game;
     private Audio sound;
 
-    public Clock(double x, double y, Textures tex, Game game) {
+    public Clock(double x, double y, Textures tex, Main game) {
         super(x, y);
         
         sound = new Audio();
@@ -45,34 +45,34 @@ public class Clock extends GameObject implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (Game.State == Game.State.GAME) {
-            if (Game.clicked) {
+        if (Main.State == Main.State.GAME) {
+            if (Main.clicked) {
                 ckindex = 30;
-                Game.clock_counter.stop();
-                Game.clicked = false;
-                if (!Game.player1_turn){
+                Main.clock_counter.stop();
+                Main.clicked = false;
+                if (!Main.player1_turn){
 
-                        Game.c.addEntity(new MacBook(Game.p1.getX(), Game.p1.getY(), game.getAngle(), game.getForce(), tex, Game.c));
-//                        Game.c.addEntity(new Bullet(Game.p1.getX(), Game.p1.getY(), tex, game, Game.c));
-
-                }
-                if (!Game.player2_turn){
-
-                        Game.c.addEntity(new MacBook(Game.p2.getX(), Game.p2.getY(), game.getAngle(), game.getForce(), tex, Game.c));
-//                        Game.c.addEntity(new Bullet(Game.p2.getX()+20, Game.p2.getY(), tex, game, Game.c));
+                        Main.c.addEntity(new MacBook(Main.p1.getX(), Main.p1.getY(), game.getAngle(), game.getForce(), tex, Main.c));
+//                        Main.c.addEntity(new Bullet(Main.p1.getX(), Main.p1.getY(), tex, game, Main.c));
 
                 }
-                Game.throwAnimation.start();
+                if (!Main.player2_turn){
+
+                        Main.c.addEntity(new MacBook(Main.p2.getX(), Main.p2.getY(), game.getAngle(), game.getForce(), tex, Main.c));
+//                        Main.c.addEntity(new Bullet(Main.p2.getX()+20, Main.p2.getY(), tex, game, Main.c));
+
+                }
+                Main.throwAnimation.start();
 
             }
-            if (!Game.clicked) {
+            if (!Main.clicked) {
                 if (ckindex == 59) {
                     sound.timeUp.play();
-                    if (Game.player1_turn) {
+                    if (Main.player1_turn) {
                         player1_turn = false;
                         player2_turn = true;
 
-                    } else if (Game.player2_turn) {
+                    } else if (Main.player2_turn) {
                         player1_turn = true;
                         player2_turn = false;
                     }

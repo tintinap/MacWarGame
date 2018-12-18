@@ -40,7 +40,7 @@ public class MacBook extends GameObject implements EntityB{
     public void tick() {
         mili+=0.01666667; //per milisec
 
-        if (Game.player1_turn && !Game.throwing_p1 && Game.throwing_p2) {
+        if (Main.player1_turn && !Main.throwing_p1 && Main.throwing_p2) {
 
             x -= (int)(force*Math.cos(Math.toRadians(angle)));
             
@@ -51,16 +51,16 @@ public class MacBook extends GameObject implements EntityB{
                 System.out.println("HIT P1");
                 //hit anim
                 sound.playerHurt.play();
-                Game.hitAnimation.start();
+                Main.hitAnimation.start();
 
                 
-                Game.throwing_p2 = false;
-                Game.recieving = true;
-                Game.clock_counter.start();                                                                                                   
+                Main.throwing_p2 = false;
+                Main.recieving = true;
+                Main.clock_counter.start();                                                                                                   
             }
 
         }
-        else  if (Game.player2_turn && Game.throwing_p1 && !Game.throwing_p2) {
+        else  if (Main.player2_turn && Main.throwing_p1 && !Main.throwing_p2) {
 
             x += (int)(force*Math.cos(Math.toRadians(angle)));
             
@@ -70,12 +70,12 @@ public class MacBook extends GameObject implements EntityB{
                 System.out.println("HIT P2");
                 //hit anim
                 sound.playerHurt.play();
-                Game.hitAnimation.start();
+                Main.hitAnimation.start();
 
 
-                Game.throwing_p1 = false;
-                Game.recieving = true;
-                Game.clock_counter.start();
+                Main.throwing_p1 = false;
+                Main.recieving = true;
+                Main.clock_counter.start();
             }
         }        
         if (x == startX){
@@ -94,10 +94,10 @@ public class MacBook extends GameObject implements EntityB{
             mili = 0;
             System.out.println("HIT THE WALL!!!");
             sound.hitSurface.play();
-            if(Game.throwing_p2) Game.throwing_p2 = false;
-            if(Game.throwing_p1) Game.throwing_p1 = false;
-            Game.recieving = true;
-            Game.clock_counter.start();
+            if(Main.throwing_p2) Main.throwing_p2 = false;
+            if(Main.throwing_p1) Main.throwing_p1 = false;
+            Main.recieving = true;
+            Main.clock_counter.start();
         }
         //bounds
         if (x > 1286 || x < -70) {
@@ -105,20 +105,20 @@ public class MacBook extends GameObject implements EntityB{
             mili = 0;
             System.out.println("DELETED.");
 //            sound.hitSurface.play();
-            if(Game.throwing_p2) Game.throwing_p2 = false;
-            if(Game.throwing_p1) Game.throwing_p1 = false;
-            Game.recieving = true;
-            Game.clock_counter.start();
+            if(Main.throwing_p2) Main.throwing_p2 = false;
+            if(Main.throwing_p1) Main.throwing_p1 = false;
+            Main.recieving = true;
+            Main.clock_counter.start();
         }
         if (y > 697 && (!(x >= 62-50 && x <= 115 && y >= 604-40 && y <= 697) || !(x >= 1158-40 && x <= 1211 && y >= 604-40 && y <= 697))) {
             c.removeEntity(this);
             mili = 0;
             System.out.println("DELETED.");
             sound.hitSurface.play();
-            if(Game.throwing_p2) Game.throwing_p2 = false;
-            if(Game.throwing_p1) Game.throwing_p1 = false;
-            Game.recieving = true;
-            Game.clock_counter.start();
+            if(Main.throwing_p2) Main.throwing_p2 = false;
+            if(Main.throwing_p1) Main.throwing_p1 = false;
+            Main.recieving = true;
+            Main.clock_counter.start();
         }
     }
     

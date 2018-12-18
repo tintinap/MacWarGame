@@ -1,7 +1,7 @@
 package com.macwargame;
 
 import com.macwargame.classes.EntityA;
-import com.macwargame.Game;
+import com.macwargame.Main;
 import com.macwargame.GameObject;
 import com.macwargame.classes.EntityB;
 
@@ -11,12 +11,12 @@ import java.awt.image.BufferedImage;
 public class Bullet extends GameObject implements EntityB {
 
     private Textures tex;
-    private Game game;
+    private Main game;
     private Controller c;
     
     Animation anim;
 
-    public Bullet(double x, double y, Textures tex, Game game, Controller c) {
+    public Bullet(double x, double y, Textures tex, Main game, Controller c) {
         super(x, y);
         this.tex = tex;
         this.game = game;
@@ -29,11 +29,11 @@ public class Bullet extends GameObject implements EntityB {
     }
 
     public void tick() {
-        /*if (Game.player1_turn) {
+        /*if (Main.player1_turn) {
 //            System.out.println("p1_turn");
             x-=10;
         }
-        if (Game.player2_turn) {
+        if (Main.player2_turn) {
 //            System.out.println("p2_turn");
             x+=10;
         }
@@ -47,7 +47,7 @@ public class Bullet extends GameObject implements EntityB {
         
         if (x > 1286 || x < 0) c.removeEntity(this);*/
 ///////////////////////////////////////////////////////////////////////
-        if (Game.player1_turn) {
+        if (Main.player1_turn) {
 
             x -= 10;
             
@@ -56,19 +56,19 @@ public class Bullet extends GameObject implements EntityB {
                 c.removeEntity(this);
                 System.out.println("HIT P1");
                 //hit anim
-//                Game.hitAnimation.start();
+//                Main.hitAnimation.start();
                 ////////////////////////////////copy here to macbok
                 // lifepoint mechanism
-                Game.lp1hpValue--;
-                Game.lp1.setLP(Game.lp1hpValue);
+                Main.lp1hpValue--;
+                Main.lp1.setLP(Main.lp1hpValue);
                 
                 ////////////////////////////////
-                Game.clock_counter.start();
+                Main.clock_counter.start();
                 
             }
 
         }
-        if (Game.player2_turn) {
+        if (Main.player2_turn) {
 
             x += 10;
             
@@ -76,13 +76,13 @@ public class Bullet extends GameObject implements EntityB {
                 c.removeEntity(this);
                 System.out.println("HIT P2");
                 //hit anim
-//                Game.hitAnimation.start();
+//                Main.hitAnimation.start();
                 ////////////////////////////////copy here to macbok
-                Game.lp2hpValue--;
-                Game.lp2.setLP(Game.lp2hpValue);
+                Main.lp2hpValue--;
+                Main.lp2.setLP(Main.lp2hpValue);
                 
                 ////////////////////////////////
-                Game.clock_counter.start();
+                Main.clock_counter.start();
             }
         }        
         
@@ -96,20 +96,20 @@ public class Bullet extends GameObject implements EntityB {
 //            c.removeEntity(this);
 //            mili = 0;
 //            System.out.println("HIT THE WALL!!!");
-//            Game.clock_counter.start();
+//            Main.clock_counter.start();
 //        }
         //bounds
         if (x > 1286 || x < 0) {
             c.removeEntity(this);
 //            mili = 0;
             System.out.println("DELETED.");
-            Game.clock_counter.start();
+            Main.clock_counter.start();
         }
         if (y > 697) {
             c.removeEntity(this);
 //            mili = 0;
             System.out.println("DELETED.");
-            Game.clock_counter.start();
+            Main.clock_counter.start();
         }
 
         
