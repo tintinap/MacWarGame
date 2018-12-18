@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 
 public class MacBook extends GameObject implements EntityB{
     
+    private Audio sound;
     private double angle;
     private Textures tex;
     private double force;
@@ -30,6 +31,8 @@ public class MacBook extends GameObject implements EntityB{
         this.tex = tex;
         this.c = c;
         
+        sound = new Audio();
+        
         Macbook = tex.macbook[0];
     }
 
@@ -47,7 +50,9 @@ public class MacBook extends GameObject implements EntityB{
                 mili = 0;
                 System.out.println("HIT P1");
                 //hit anim
+                sound.playerHurt.play();
                 Game.hitAnimation.start();
+
                 
                 Game.throwing_p2 = false;
                 Game.recieving = true;
@@ -64,7 +69,9 @@ public class MacBook extends GameObject implements EntityB{
                 mili = 0;
                 System.out.println("HIT P2");
                 //hit anim
+                sound.playerHurt.play();
                 Game.hitAnimation.start();
+
 
                 Game.throwing_p1 = false;
                 Game.recieving = true;
@@ -82,10 +89,11 @@ public class MacBook extends GameObject implements EntityB{
 
 
         // obstacle
-        if (x >= 600-60 && x <= 696 && y >= 498-35 && y <=697) {
+        if (x >= 600-55 && x <= 696 && y >= 498-35 && y <=697) {
             c.removeEntity(this);
             mili = 0;
             System.out.println("HIT THE WALL!!!");
+            sound.hitSurface.play();
             if(Game.throwing_p2) Game.throwing_p2 = false;
             if(Game.throwing_p1) Game.throwing_p1 = false;
             Game.recieving = true;
@@ -96,15 +104,17 @@ public class MacBook extends GameObject implements EntityB{
             c.removeEntity(this);
             mili = 0;
             System.out.println("DELETED.");
+//            sound.hitSurface.play();
             if(Game.throwing_p2) Game.throwing_p2 = false;
             if(Game.throwing_p1) Game.throwing_p1 = false;
             Game.recieving = true;
             Game.clock_counter.start();
         }
-        if (y > 697) {
+        if (y > 697 && (!(x >= 62-50 && x <= 115 && y >= 604-40 && y <= 697) || !(x >= 1158-40 && x <= 1211 && y >= 604-40 && y <= 697))) {
             c.removeEntity(this);
             mili = 0;
             System.out.println("DELETED.");
+            sound.hitSurface.play();
             if(Game.throwing_p2) Game.throwing_p2 = false;
             if(Game.throwing_p1) Game.throwing_p1 = false;
             Game.recieving = true;

@@ -49,6 +49,12 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage ss_clock = null;
     protected static Timer clock_counter;
     
+  
+    private Audio bg_sound;
+    private boolean mFirstRound = true;
+    private boolean gFirstRound = true;
+    private boolean wFirstRound = true;
+    
     ///////////////////////////////////////Mouse x, y///////////////////////////////
     private double mp_x, mp_y, mr_x, mr_y;
     private double force, angle, o_side, distance;
@@ -139,6 +145,8 @@ public class Game extends Canvas implements Runnable {
         winner_head = new Head(493, 307,tex);
         winner_head2 = new Head(493, 307, tex);
         
+        bg_sound = new Audio();
+        
 
         this.addKeyListener(new KeyInput(this));
         this.addMouseListener(new MouseInput(this));
@@ -224,7 +232,22 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void tick() {
+        if (State == STATE.MENU) {
+            if (mFirstRound) {
+                bg_sound.menu_music.play();
+                bg_sound.menu_music.loop();
+            } mFirstRound = false;
+            
+        }
+        
         if (State == STATE.GAME) {
+            if (gFirstRound) {
+                bg_sound.menu_music.stop();
+                bg_sound.battle_music.play();
+                bg_sound.battle_music.loop();
+            } gFirstRound = false;
+
+            
             p1.tick();
             p2.tick();
             
@@ -252,6 +275,13 @@ public class Game extends Canvas implements Runnable {
 
                 State = STATE.WINNER;
             }
+        }
+        
+        if (State == STATE.WINNER) {
+            if (wFirstRound) {
+                bg_sound.battle_music.stop();
+                bg_sound.victory_music.play();
+            } wFirstRound = false;
         }
 
     }
@@ -507,6 +537,11 @@ public class Game extends Canvas implements Runnable {
                 
                 p1_tex = "sprite-1_left";
                 p2_tex = "sprite-2_right";
+                
+                mFirstRound = true;
+                gFirstRound = true;
+                wFirstRound = true;
+                
                 
                 /*=========================================================reset all==========================================================*/
                State = STATE.MENU;

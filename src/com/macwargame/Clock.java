@@ -21,10 +21,12 @@ public class Clock extends GameObject implements ActionListener{
     private BufferedImage clock;
     protected static int ckindex;
     private Game game;
+    private Audio sound;
 
     public Clock(double x, double y, Textures tex, Game game) {
         super(x, y);
         
+        sound = new Audio();
         this.tex = tex;
         ckindex = 30;
         clock = tex.clock[30];
@@ -65,6 +67,7 @@ public class Clock extends GameObject implements ActionListener{
             }
             if (!Game.clicked) {
                 if (ckindex == 59) {
+                    sound.timeUp.play();
                     if (Game.player1_turn) {
                         player1_turn = false;
                         player2_turn = true;

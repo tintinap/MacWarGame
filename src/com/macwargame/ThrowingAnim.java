@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 public class ThrowingAnim implements ActionListener {
 
+    private Audio throwing;
     private Textures tex;
     private int act1 = 0;
     private int act2 = 4;
