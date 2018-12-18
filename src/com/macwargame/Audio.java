@@ -23,47 +23,4 @@ public class Audio {
     AudioClip playerHurt = Applet.newAudioClip(hurt);
     AudioClip timeUp = Applet.newAudioClip(bell);
     
-    // for Animation sound
-//    public void throwing() {
-//        throwing_sound.play();
-//        System.out.println("THROWING SOUND ACTIVE!!!");
-//    }
-//    
-    
-    
-//    //for menu scene
-//    public void playMenuMusic() {
-//        menu_music.loop();
-//    }
-//
-//    public void stopMenuMusic() {
-//        menu_music.stop();
-//    }
-//    
-//    public void loopMenuMusic() {
-//        menu_music.loop();
-//    }
-//    
-//
-//    // for battle scene
-//    public void playBattleMusic() {
-//        battle_music.play();
-//    }
-//    
-//    public void stopBattleMusic() {
-//        battle_music.stop();
-//    }
-//    
-//    public void loopBattleMusic() {
-//        battle_music.loop();
-//    }
-//    
-//    //for winner scene
-//    public void playVictoryMusic() {
-//        victory_music.play();
-//    }
-//    
-//    public void stopVictoryMusic() {
-//        victory_music.stop();
-//    }
 }
